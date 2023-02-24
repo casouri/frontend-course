@@ -1,8 +1,8 @@
-table {
+table.table {
     border-collapse: collapse;
 }
 
-td, th {
+table.table td, table.table th {
     border: 1px solid black;
     text-align: center;
     padding: 0.15rem 1rem;
