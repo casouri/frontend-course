@@ -11,7 +11,7 @@ table.table td, table.table th {
 
 input.search-bar {
     border: 1px solid gray;
-    border-radius: 50vh;
+    border-radius: 100vh;
     width: 10rem;
     padding: 0.15rem 0.5rem;
 }

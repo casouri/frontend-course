@@ -15,9 +15,9 @@ const itemsObject = [
 ];
 
 function doubleObject(array) {
-  return array.map(obj => ({
-    quantity: obj.quantity * 2,
-    price: obj.price * 2
+  return array.map(({quantiy, price}) => ({
+    quantity: quantity * 2,
+    price: price * 2
   }));
 }
 
@@ -47,7 +47,7 @@ const expectedReturnString =
   'perhaps the easiest to understand case for reduce is to return the sum of all the elements in an array';
 
 function convert(str) {
-  return str.trim().split(" ").filter(str => str !== "")
+  return str.trim().split(/ +/)
     .map(str => str.replace(/[^a-zA-Z]/g, " ").toLowerCase()).join(" ");
 }
 
@@ -82,7 +82,7 @@ const expectedReturnArray = [
 ];
 
 function merge(array1, array2) {
-  let table = new Map();
+  const table = new Map();
   for (let elm of array1) {
     table.set(elm.uuid, {...elm, role: null});
   }
@@ -93,7 +93,7 @@ function merge(array1, array2) {
       table.set(elm.uuid, {...elm, name: null})
     }
   }
-  let array = Array.from(table.values());
+  const array = Array.from(table.values());
   array.sort((a, b) => a.uuid - b.uuid);
   return array;
 }

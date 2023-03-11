@@ -1,0 +1,43 @@
+body {
+    font-family: system-ui;
+    margin-bottom: 6rem;
+    margin-left: 6rem;
+}
+
+/* Table */
+
+#q1-table {
+    border-collapse: collapse;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#q1-table td, #q1-table th {
+    padding: 0.1rem 1rem;
+    text-align: left;
+}
+
+/* Form */
+
+#q1-form {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-gap: 0.5rem;
+}
+
+#q1-form label {
+    grid-column: 1 / 2;
+    justify-self: end;
+}
+
+#q1-form input {
+    grid-column: 2 / 3;
+}
+
+#q1-button {
+    grid-column: 2 / 3;
+    width: 3rem;
+    font-size: 0.8rem;
+}
