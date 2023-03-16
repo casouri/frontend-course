@@ -44,18 +44,16 @@ const tableInfo = {
   ],
 };
 
-function insertTd(tr, text, type) {
+function makeTd(text, type) {
   const td = document.createElement(type);
   td.textContent = text;
-  tr.appendChild(td);
+  return td;
 }
 
-function insertTr(tbody, rowText, type) {
+function makeTr(rowText, type) {
   const tr = document.createElement("tr");
-  tbody.appendChild(tr);
-  for (const text of rowText) {
-    insertTd(tr, text, type);
-  }
+  tr.append(...rowText.map((text) => makeTd(text, type)));
+  return tr;
 }
 
 function fillTable() {
@@ -65,15 +63,15 @@ function fillTable() {
   table.append(thead, tbody);
 
   // Insert header row.
-  const tr = document.createElement("tr");
+  const tr = makeTr(tableInfo.tableHeader, "th");
   thead.appendChild(tr);
-  insertTr(thead, tableInfo.tableHeader, "th");
 
   // Insert body row.
-  for (const row of tableInfo.tableContent) {
+  const trs = tableInfo.tableContent.map((row) => {
     const rowText = tableInfo.tableHeader.map((header) => row[header]);
-    insertTr(tbody, rowText, "td");
-  }
+    return makeTr(rowText, "td");
+  });
+  tbody.append(...trs);
 }
 
 function insertNewRow(event) {
@@ -81,7 +79,8 @@ function insertNewRow(event) {
   const elements = form.elements;
   const rowText = tableInfo.tableHeader.map((header) => elements[header].value);
   let tbody = document.querySelector("#q1-table tbody");
-  insertTr(tbody, rowText, "td");
+  const tr = makeTr(rowText, "td");
+  tbody.appendChild(tr);
   Array.from(elements).forEach((elm) => (elm.value = ""));
 }
 
@@ -95,15 +94,15 @@ dynamically as following:
 const list = ["HTML", "JavaScript", "CSS", "React", "Redux", "Java"];
 
 function fillList() {
-  const insertLi = (ol, text) => {
+  const makeLi = (text) => {
     const li = document.createElement("li");
     li.textContent = text;
-    ol.appendChild(li);
+    return li;
   };
   const ol = document.querySelector("#q2-ol");
   const ul = document.querySelector("#q2-ul");
-  list.forEach((text) => insertLi(ol, text));
-  list.forEach((text) => insertLi(ul, text));
+  ol.append(...list.map(makeLi));
+  ul.append(...list.map(makeLi));
 }
 
 /*
@@ -126,13 +125,12 @@ const dropDownList = [
 
 function fillSelect() {
   const selection = document.getElementById("q3-select");
-  for (const item of dropDownList) {
-    let option = document.createElement("option", {
-      value: item.value,
-    });
+  const options = dropDownList.map((item) => {
+    const option = document.createElement("option", { value: item.value });
     option.textContent = item.content;
-    selection.appendChild(option);
-  }
+    return option;
+  });
+  selection.append(...options);
 }
 
 function logSelection(event) {
