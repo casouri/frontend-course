@@ -1,0 +1,25 @@
+body {
+    width: 38rem;
+    margin: auto;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-family: system-ui;
+    font-size: 15pt;
+}
+
+#todo-input {
+    font-size: 15pt;
+}
+
+button {
+    font-size: 12pt;
+}
+
+.inline-button {
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+li.completed {
+    text-decoration: line-through;
+}
