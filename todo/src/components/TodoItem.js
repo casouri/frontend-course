@@ -1,7 +1,11 @@
 import classNames from "classnames";
+import { useContext } from "react";
+import TodoContext from "../context";
 
-function TodoItem({todo, setTodos}) {
+function TodoItem({todo}) {
   const myKey = todo.key;
+
+  const { setTodos } = useContext(TodoContext);
 
   const onDoubleClick = () => {
     setTodos((todos) => {

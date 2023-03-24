@@ -1,13 +1,16 @@
 import classNames from "classnames";
+import { useContext } from "react";
+import TodoContext from "../context";
 
 import TodoItem from "./TodoItem";
 
-function TodoList({ todos, setTodos }) {
+function TodoList() {
+  const { todos } = useContext(TodoContext);
+
   const listItems = todos.map((todo) => (
     <TodoItem
       key={todo.key}
       todo={todo}
-      setTodos={setTodos}
       className={classNames({ completed: todo.completed })}
     />
   ));

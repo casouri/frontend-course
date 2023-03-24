@@ -3,6 +3,7 @@ import { useState } from "react";
 import TodoInput from "./components/TodoInput";
 import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
+import TodoContext from "./context/index";
 import "./App.css";
 
 function App() {
@@ -16,8 +17,10 @@ function App() {
   return (
     <div className="App">
       <TodoHeader content="Todo" />
-      <TodoInput setTodos={setTodos} />
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoContext.Provider value={{ todos, setTodos }}>
+        <TodoInput />
+        <TodoList />
+      </TodoContext.Provider>
     </div>
   );
 }
