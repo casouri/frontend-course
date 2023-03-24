@@ -1,28 +1,18 @@
 import classNames from "classnames";
-import { useContext } from "react";
-import TodoContext from "../context";
+import { useDispatch } from "react-redux";
+
+import {modTodo, delTodo} from "../actions";
 
 function TodoItem({todo}) {
   const myKey = todo.key;
-
-  const { setTodos } = useContext(TodoContext);
+  const dispatch = useDispatch();
 
   const onDoubleClick = () => {
-    setTodos((todos) => {
-      return todos.map((todo) => {
-        if (todo.key === myKey) {
-          return {...todo, completed: !todo.completed};
-        } else {
-          return todo;
-        }
-      })
-    })
+    dispatch(modTodo(myKey));
   }
 
   const onDelete = () => {
-    setTodos((todos) => {
-      return todos.filter((todo) => todo.key !== myKey);
-    })
+    dispatch(delTodo(myKey));
   }
 
   return (

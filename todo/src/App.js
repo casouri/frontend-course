@@ -1,26 +1,18 @@
-import { useState } from "react";
-
 import TodoInput from "./components/TodoInput";
 import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
-import TodoContext from "./context/index";
+import { addTodo } from "./actions";
 import "./App.css";
 
 function App() {
-  const initialTodos = [
-    { key: Math.random(), content: "Buy milk", completed: true },
-    { key: Math.random(), content: "World domination", completed: false },
-  ];
-
-  const [todos, setTodos] = useState(initialTodos);
+  addTodo({ content: "Buy milk", completed: true });
+  addTodo({ content: "World domination", completed: false });
 
   return (
     <div className="App">
       <TodoHeader content="Todo" />
-      <TodoContext.Provider value={{ todos, setTodos }}>
-        <TodoInput />
-        <TodoList />
-      </TodoContext.Provider>
+      <TodoInput />
+      <TodoList />
     </div>
   );
 }

@@ -1,25 +1,21 @@
-import { useContext, useRef, useState } from "react";
-import TodoContext from "../context";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { addTodo } from "../actions";
 
 function TodoInput() {
 
   const [userInput, setUserInput] = useState("");
-  const {setTodos} = useContext(TodoContext);
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const onAdd = () => {
-    const value = userInput.trim();
-    if (value !== "") {
-      setTodos((todos) => [{
-        key: Math.random(),
-        content: userInput,
-        completed: false,
-      },
-        ...todos]);
-
-      setUserInput("");
-      inputRef.current.focus();
+    const content = userInput.trim();
+    if (content !== "") {
+      dispatch(addTodo(content));
     }
+    setUserInput("");
+    inputRef.current.focus();
   };
 
   const onEnter = (event) => {
