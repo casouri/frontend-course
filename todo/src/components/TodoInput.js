@@ -1,32 +1,38 @@
-import { useState } from "react";
+import React from 'react';
 
-function TodoInput({setTodos}) {
-
-  const [userInput, setUserInput] = useState("");
-
-  const onAdd = () => {
-    setTodos((todos) => [{
-      key: Math.random(),
-      content: userInput,
-      completed: false,
-    },
-      ...todos]);
-    setUserInput("");
-  };
-
-  const onChange = (event) => {
-    setUserInput(event.target.value);
+class TodoInput extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { input: "" };
   }
 
-  return (
-    <div>
-      <input
-        type="text" value={userInput} onChange={onChange}
-        className="todo-input"
-      />
-      <button onClick={onAdd}>Add</button>
-    </div>
-  )
+  render() {
+    const {setTodos} = this.props;
+
+    const onAdd = () => {
+      setTodos((todos) => [{
+        key: Math.random(),
+        content: this.state.input,
+        completed: false,
+      },
+        ...todos]);
+      this.setState({ input: "" });
+    };
+
+    const onChange = (event) => {
+      this.setState((state, props) => ({ input: event.target.value }));
+    }
+
+    return (
+      <div>
+        <input
+          type="text" value={this.state.input} onChange={onChange}
+          className="todo-input"
+        />
+        <button onClick={onAdd}>Add</button>
+      </div>
+    );
+  }
 }
 
 export default TodoInput;
