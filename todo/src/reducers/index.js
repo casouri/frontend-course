@@ -1,19 +1,14 @@
+import { combineReducers } from "redux";
 
-import { ADD_TODO, MOD_TODO, DEL_TODO } from "../enum";
+import { ADD_TODO, MOD_TODO, DEL_TODO, INIT_TODO, ERROR, RESET_ERROR } from "../enum";
 
-const initialTodos = [
-  { key: Math.random(), content: "Buy Mlik", completed: true },
-  { key: Math.random(), content: "World domination", completed: false },
-];
-
-export const reducer = (state = initialTodos, action) => {
+const todoReducer = (state = [], action) => {
   switch (action.type) {
   case ADD_TODO:
     {
       const todos = state;
-      const content = action.payload;
       return [
-        { key: Math.random(), content, completed: false },
+        action.payload,
         ...todos
       ];
     }
@@ -35,7 +30,30 @@ export const reducer = (state = initialTodos, action) => {
       const todos = state;
       return todos.filter((todo) => todo.key !== key);
     }
+  case INIT_TODO:
+    {
+      return action.payload;
+    }
   default:
     return state;
   }
 };
+
+const initErrorState = { error: false, message: "" };
+
+export const errorReducer = (state = initErrorState, action) => {
+  const {type, payload} = action;
+  switch (type) {
+  case ERROR:
+    return { error: true, message: payload };
+  case RESET_ERROR:
+    return initErrorState;
+  default:
+    return state;
+  }
+}
+
+export default combineReducers({
+  todos: todoReducer,
+  error: errorReducer
+});

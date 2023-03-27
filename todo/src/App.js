@@ -1,18 +1,26 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import TodoInput from "./components/TodoInput";
 import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
-import { addTodo } from "./actions";
+import ErrorDisplay from "./components/ErrorDisplay";
+import { initTodo } from "./actions";
+
 import "./App.css";
 
 function App() {
-  addTodo({ content: "Buy milk", completed: true });
-  addTodo({ content: "World domination", completed: false });
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(initTodo());
+  }, [dispatch]);
 
-  return (
+return (
     <div className="App">
       <TodoHeader content="Todo" />
       <TodoInput />
       <TodoList />
+      <ErrorDisplay />
     </div>
   );
 }

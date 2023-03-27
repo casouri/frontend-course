@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
 
 function TodoList() {
-  const todos = useSelector((state) => state);
+  const todos = useSelector((state) => state.todos);
 
   const listItems = todos.map((todo) => (
     <TodoItem

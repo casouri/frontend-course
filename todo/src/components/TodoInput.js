@@ -12,7 +12,11 @@ function TodoInput() {
   const onAdd = () => {
     const content = userInput.trim();
     if (content !== "") {
-      dispatch(addTodo(content));
+      dispatch(addTodo({
+        key: Math.random(),
+        content,
+        completed: false
+      }));
     }
     setUserInput("");
     inputRef.current.focus();
